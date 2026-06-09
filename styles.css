@@ -274,6 +274,103 @@ body {
   text-shadow: 0 0 18px rgba(25, 255, 120, 0.35);
 }
 
+.lottery-puzzle {
+  display: grid;
+  gap: 14px;
+  justify-items: center;
+}
+
+.lottery-ticket {
+  width: min(280px, 78vw);
+  padding: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.38);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.015)),
+    #101010;
+  color: var(--text);
+  box-shadow: 0 0 28px rgba(255, 255, 255, 0.05);
+}
+
+.lottery-title {
+  margin-bottom: 14px;
+  font: 700 14px/1.2 "Courier New", Courier, monospace;
+  text-align: left;
+  text-transform: uppercase;
+}
+
+.scratch-area {
+  position: relative;
+  height: 128px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: #050505;
+}
+
+.scratch-result,
+.scratch-cover {
+  position: absolute;
+  inset: 0;
+}
+
+.scratch-result {
+  display: grid;
+  place-items: center;
+  padding: 14px;
+  color: var(--warning);
+  font-family: "Courier New", Courier, monospace;
+}
+
+.scratch-cover {
+  width: 100%;
+  height: 100%;
+  cursor: crosshair;
+  touch-action: none;
+  transition: opacity 220ms ease;
+}
+
+.scratch-cover.is-revealed {
+  opacity: 0;
+}
+
+.lottery-star {
+  color: var(--warning);
+  font-size: 52px;
+  line-height: 1;
+  text-shadow: 0 0 18px rgba(242, 216, 75, 0.36);
+}
+
+.lottery-prize {
+  margin-top: 8px;
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1.2;
+}
+
+.lottery-blank {
+  color: rgba(255, 255, 255, 0.32);
+  font-size: 18px;
+  line-height: 1.2;
+}
+
+.lottery-odds {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.32);
+  font: 12px/1.2 "Courier New", Courier, monospace;
+}
+
+.lottery-chance {
+  min-width: 1.8em;
+  display: inline-block;
+  color: rgba(255, 255, 255, 0.36);
+  outline: 0;
+  text-align: right;
+}
+
+.lottery-chance:focus {
+  color: rgba(255, 255, 255, 0.72);
+  background: rgba(255, 255, 255, 0.06);
+}
+
 .problem-list-wrap {
   width: min(520px, 82vw);
 }
