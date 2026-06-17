@@ -9,7 +9,7 @@
   };
 
   const ending = {
-    id: 13,
+    id: 17,
     name: "end",
     content: '<h1 class="end-title">END</h1>',
   };
@@ -20,6 +20,7 @@
   const centerpiece = document.getElementById("centerpiece");
   const form = document.getElementById("answerForm");
   const input = document.getElementById("answerInput");
+  const nextButton = document.getElementById("nextButton");
   const helpButton = document.getElementById("helpButton");
   const helpPanel = document.getElementById("helpPanel");
   const clearRateText = document.getElementById("clearRateText");
@@ -97,6 +98,14 @@
     activeCleanup = null;
   }
 
+  function showNext() {
+    nextButton.hidden = false;
+  }
+
+  function hideNext() {
+    nextButton.hidden = true;
+  }
+
   function setHelpOpen(isOpen) {
     updateClearRateText();
     helpPanel.hidden = !isOpen;
@@ -110,6 +119,7 @@
 
   function renderStage() {
     cleanupStage();
+    hideNext();
     currentView = "stage";
     const stage = getCurrentStage();
     counter.textContent = `#${stage.id}`;
@@ -118,7 +128,11 @@
 
     if (typeof stage.onRender === "function") {
       activeCleanup = stage.onRender({
+        counter,
         centerpiece,
+        advance,
+        showNext,
+        hideNext,
         input,
         storage: window.localStorage,
       });
@@ -131,6 +145,7 @@
 
   function renderList() {
     cleanupStage();
+    hideNext();
     currentView = "list";
     counter.textContent = "#list";
     problemName.textContent = "problem list";
@@ -170,6 +185,7 @@
   }
 
   function advance() {
+    hideNext();
     currentIndex += 1;
     maxReachedIndex = Math.max(maxReachedIndex, currentIndex);
     saveProgress();
@@ -262,6 +278,8 @@
       stage.onSubmit({
         value: input.value,
         centerpiece,
+        showNext,
+        hideNext,
         input,
         storage: window.localStorage,
       })
@@ -282,6 +300,8 @@
     setHelpOpen(helpPanel.hidden);
     input.focus();
   });
+
+  nextButton.addEventListener("click", advance);
 
   setHelpOpen(false);
   saveProgress();

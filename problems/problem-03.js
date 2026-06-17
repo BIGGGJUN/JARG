@@ -8,7 +8,7 @@ window.ARG_PROBLEMS.push({
       <p class="bottle-timer" aria-live="polite">12:00:00</p>
     </div>
   `,
-  onRender({ centerpiece, storage }) {
+  onRender({ centerpiece, storage, showNext }) {
     const START_KEY = "arg-problem-03-start";
     const DURATION_MS = 12 * 60 * 60 * 1000;
     const timer = centerpiece.querySelector(".bottle-timer");
@@ -36,6 +36,7 @@ window.ARG_PROBLEMS.push({
     function revealAnswer() {
       state.revealed = true;
       centerpiece.innerHTML = '<h1 class="time-gold">Time is Gold</h1>';
+      showNext();
     }
 
     function updateTimer() {
@@ -59,7 +60,7 @@ window.ARG_PROBLEMS.push({
 
     return () => window.clearInterval(intervalId);
   },
-  onSubmit({ value, centerpiece, storage }) {
+  onSubmit({ value, centerpiece, storage, showNext }) {
     if (value.trim().toLowerCase() !== "nah") {
       return false;
     }
@@ -73,6 +74,7 @@ window.ARG_PROBLEMS.push({
     }
 
     centerpiece.innerHTML = '<h1 class="time-gold">Time is Gold</h1>';
+    showNext();
     return true;
   },
 });

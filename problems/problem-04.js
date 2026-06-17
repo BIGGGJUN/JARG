@@ -10,7 +10,7 @@ window.ARG_PROBLEMS.push({
       <p class="perfect-answer" hidden>Perfect</p>
     </div>
   `,
-  onRender({ centerpiece }) {
+  onRender({ centerpiece, showNext, hideNext }) {
     const TARGET_WIDTH = 960;
     const TOLERANCE = 4;
     const answer = centerpiece.querySelector(".perfect-answer");
@@ -18,6 +18,11 @@ window.ARG_PROBLEMS.push({
     function checkFit() {
       const isPerfect = Math.abs(window.innerWidth - TARGET_WIDTH) <= TOLERANCE;
       answer.hidden = !isPerfect;
+      if (isPerfect) {
+        showNext();
+      } else {
+        hideNext();
+      }
     }
 
     const intervalId = window.setInterval(checkFit, 250);
