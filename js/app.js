@@ -122,7 +122,9 @@
     hideNext();
     currentView = "stage";
     const stage = getCurrentStage();
-    counter.textContent = `#${stage.id}`;
+    const isEnding = stage === ending;
+    counter.hidden = isEnding;
+    counter.textContent = isEnding ? "" : `#${stage.id}`;
     problemName.textContent = stage.name;
     centerpiece.innerHTML = stage.content || "";
 
@@ -147,6 +149,7 @@
     cleanupStage();
     hideNext();
     currentView = "list";
+    counter.hidden = false;
     counter.textContent = "#list";
     problemName.textContent = "problem list";
     form.hidden = false;
@@ -180,6 +183,47 @@
         </ol>
       </div>
     `;
+    syncHelpState();
+    focusInput();
+  }
+
+  function renderHelp() {
+    cleanupStage();
+    hideNext();
+    currentView = "help";
+    counter.hidden = false;
+    counter.textContent = "#help";
+    problemName.textContent = "help";
+    form.hidden = false;
+    setHelpOpen(false);
+
+    centerpiece.innerHTML = `
+      <div class="help-page">
+        <h1>help</h1>
+
+        <section class="help-topic">
+          <h2>진행방식</h2>
+          <p>정답란에 텍스트 입력 후 Enter.</p>
+        </section>
+
+        <section class="help-topic">
+          <h2>해시태그</h2>
+          <p>정답란에 <kbd>#list</kbd>, <kbd>#lobby</kbd>, <kbd>#reset</kbd>처럼 입력.</p>
+          <p>열린 문제는 <kbd>#번호</kbd>로 이동. 예: <kbd>#7</kbd></p>
+        </section>
+
+        <section class="help-topic">
+          <h2>힌트</h2>
+          <p><strong>jshsemail@gmail.com</strong>으로 메일 전송.</p>
+          <pre class="hint-template"><code>To: jshsemail@gmail.com
+Subject: HINT #문제번호
+
+예: HINT #10</code></pre>
+          <p>PC/노트북 플레이 권장</p>
+        </section>
+      </div>
+    `;
+
     syncHelpState();
     focusInput();
   }
@@ -242,6 +286,11 @@
       return true;
     }
 
+    if (command === "#help") {
+      renderHelp();
+      return true;
+    }
+
     if (command === "#lobby") {
       goToLobby();
       return true;
@@ -267,7 +316,7 @@
       return;
     }
 
-    if (currentView === "list") {
+    if (currentView !== "stage") {
       markWrong();
       return;
     }

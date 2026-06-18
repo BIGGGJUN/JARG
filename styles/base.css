@@ -185,6 +185,59 @@ body {
   color: rgba(255, 255, 255, 0.24);
 }
 
+.help-page {
+  width: min(460px, 84vw);
+  max-height: calc(100vh - 10rem);
+  overflow-y: auto;
+  color: rgba(255, 255, 255, 0.68);
+  font-family: "Courier New", Courier, monospace;
+  text-align: left;
+  scrollbar-color: rgba(255, 255, 255, 0.24) transparent;
+}
+
+.help-page h1 {
+  margin: 0 0 12px;
+  color: var(--warning);
+  font: 700 15px/1.2 "Courier New", Courier, monospace;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.help-topic {
+  margin: 0 0 18px;
+}
+
+.help-topic h2 {
+  margin: 0 0 7px;
+  color: rgba(242, 216, 75, 0.76);
+  font: 700 13px/1.25 "Courier New", Courier, monospace;
+  letter-spacing: 0;
+}
+
+.help-topic p {
+  margin: 0 0 6px;
+  font-size: clamp(13px, 1.5vw, 15px);
+  line-height: 1.5;
+}
+
+.help-topic p:last-child {
+  margin-bottom: 0;
+}
+
+.help-page kbd {
+  display: inline-block;
+  color: var(--warning);
+  font: 700 0.95em/1.35 "Courier New", Courier, monospace;
+}
+
+.hint-template {
+  overflow-x: auto;
+  margin: 8px 0 14px;
+  color: rgba(255, 255, 255, 0.72);
+  font: 13px/1.45 "Courier New", Courier, monospace;
+  white-space: pre-wrap;
+}
+
 .problem-name {
   position: fixed;
   z-index: 5;
